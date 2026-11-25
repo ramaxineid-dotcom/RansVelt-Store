@@ -9,8 +9,8 @@
 <meta property="og:title" content="RansVelt Store - Nokos & Social Boost Tercepat">
 <meta property="og:description" content="Penyedia Layanan Digital Terpercaya Dan Tercepat">
 <meta property="og:url" content="https://ramdansya.my.id/">
-<meta property="og:image" content="https://files.catbox.moe/dagciy.png">
-<meta property="og:image:secure_url" content="https://files.catbox.moe/dagciy.png">
+<meta property="og:image" content="https://files.catbox.moe/dagciy.png?v=2">
+<meta property="og:image:secure_url" content="https://files.catbox.moe/dagciy.png?v=2">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -19,7 +19,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="RansVelt Store - Nokos & Social Boost Tercepat">
 <meta name="twitter:description" content="Penyedia Layanan Digital Terpercaya Dan Tercepat">
-<meta name="twitter:image" content="https://files.catbox.moe/dagciy.png">
+<meta name="twitter:image" content="https://files.catbox.moe/dagciy.png?v=2">
 <link rel="icon" href="https://files.catbox.moe/dagciy.png">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -31,7 +31,7 @@ body{background:#eef4ff;color:#0f172a;padding-bottom:110px}
 h1,h2,h3{font-family:'Inter',sans-serif;font-weight:800;letter-spacing:-.02em}
 .logo{font-family:'Syne',sans-serif;font-weight:800}
 .topbar h2{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.01em}
-button{cursor:pointer;border:0;transition:.2s}button:active{transform:scale(.96)}
+button{cursor:pointer;border:0;transition:.2s;pointer-events:auto;position:relative;z-index:2}button:active{transform:scale(.96)}
 .logo{font-size:24px}.logo span{color:#2563eb}
 .sidebar{width:260px;background:#fff;border-right:1px solid #e2e8f0;padding:20px;position:fixed;top:0;bottom:0;left:0;display:flex;flex-direction:column;z-index:50}
 .nav{margin-top:22px;display:flex;flex-direction:column;gap:8px}
@@ -46,6 +46,7 @@ button{cursor:pointer;border:0;transition:.2s}button:active{transform:scale(.96)
 .glass-blue{background:linear-gradient(135deg,#2563eb,#3b82f6);border-radius:20px;color:#fff;padding:20px}
 .btn{width:100%;padding:12px;border-radius:999px;background:#2563eb;color:#fff;font-weight:700;margin-top:10px}
 .btn-ghost{background:#f1f5f9;color:#0f172a;border:1px solid #e2e8f0}.btn-green{background:#16a34a}
+#btnPesan{position:relative;z-index:10!important;pointer-events:auto!important;display:block!important;opacity:1!important}
 input,select,textarea{width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:12px;margin:6px 0;background:#f8fafc;font-size:14px}
 label{font-size:12px;font-weight:700;color:#334155}.section-title{font-size:17px;margin:18px 2px 10px}
 .auth-tabs{display:flex;background:#f1f5f9;border-radius:999px;padding:4px;margin:12px 0}
@@ -79,11 +80,12 @@ label{font-size:12px;font-weight:700;color:#334155}.section-title{font-size:17px
 .qris-box{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:16px;padding:14px;text-align:center;margin:10px 0}
 .qris-box img{width:100%;max-width:260px;border-radius:12px;margin:8px auto;display:block;background:#fff;padding:6px;border:1px solid #e2e8f0;min-height:200px;cursor:zoom-in}
 .qris-error{display:none;font-size:12px;color:#ef4444;font-weight:700;margin-top:8px}
-.qris-zoom{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;flex-direction:column}
-.qris-zoom.show{display:flex}
+.qris-zoom{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;flex-direction:column;pointer-events:none}
+.qris-zoom.show{display:flex;pointer-events:auto}
 .qris-zoom img{width:100%;max-width:420px;border-radius:16px;background:#fff;padding:10px;cursor:zoom-out}
 .qris-zoom p{color:#fff;font-size:12px;margin-top:12px;opacity:.8}
 .qris-zoom button{margin-top:14px;padding:10px 22px;border-radius:999px;background:#fff;color:#0f172a;font-weight:800}
+#page-checkout{padding-bottom:140px}
 @media(max-width:768px){
 .sidebar{display:none}.main{margin-left:0;padding:12px;padding-bottom:20px}body{padding-bottom:100px}
 .topbar{top:8px;padding:12px 14px;border-radius:16px}.topbar h2{font-size:17px!important}
@@ -147,14 +149,13 @@ label{font-size:12px;font-weight:700;color:#334155}.section-title{font-size:17px
 <label>Catatan (Opsional)</label><input id="coNote" placeholder="Catatan untuk admin">
 <label>Pembayaran - QRIS</label>
 <div class="qris-box"><b>Scan QRIS di bawah ini</b><br><small id="qrisTotal" style="color:#2563eb;font-weight:800"></small><br>
-<!-- QRIS DITANEM LANGSUNG DISINI, GA DARI CONFIG.JS -->
 <img id="qrisImg" src="https://cdn.imagetourls.com/uploads/tyImg/KC2k0b0t.jpg" alt="QRIS RansVelt Store" referrerpolicy="no-referrer" onclick="openQRISZoom()" onerror="qrisFailed()">
 <div style="font-size:11px;color:#64748b;margin-top:4px">Klik gambar untuk memperbesar</div>
 <a id="qrisOpenLink" href="https://cdn.imagetourls.com/uploads/tyImg/KC2k0b0t.jpg" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:8px 16px;border-radius:999px;background:#2563eb;color:#fff;font-weight:700;font-size:12px;text-decoration:none">Buka QRIS di Tab Baru</a>
 <div id="qrisError" class="qris-error">QRIS gagal dimuat. Klik tombol di atas untuk buka QRIS.</div>
 <small style="display:block;margin-top:8px">Bayar sesuai total, lalu upload bukti di bawah</small></div>
 <label>Upload Bukti Pembayaran *</label><input type="file" id="coBukti" accept="image/*">
-<button class="btn btn-green" onclick="placeOrder()">Kirim Bukti & Buat Pesanan</button><button class="btn btn-ghost" onclick="goTab('dashboard')">Batal</button></div></div>
+<button id="btnPesan" type="button" class="btn btn-green" onclick="placeOrder()">Kirim Bukti & Buat Pesanan</button><button type="button" class="btn btn-ghost" onclick="goTab('dashboard')">Batal</button></div></div>
 </div>
 <nav class="bottom-nav" id="bottomNav">
 <button class="active" data-nav="dashboard" onclick="showPage('dashboard',null)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Dashboard</button>
@@ -165,7 +166,6 @@ label{font-size:12px;font-weight:700;color:#334155}.section-title{font-size:17px
 <script>
 firebase.initializeApp(firebaseConfig);const db=firebase.database();
 let STOCK={},CURRENT_USER=JSON.parse(localStorage.getItem('ransvelt_user')||'null'),SELECTED=null,SELECTED_QTY=1,CUR_CAT='NOKOS TELE',SEL_STARS=5;
-// QRIS HARDCODE DI INDEX.HTML - GA PAKE CONFIG.JS LAGI
 const QRIS_HARDCODED="https://cdn.imagetourls.com/uploads/tyImg/KC2k0b0t.jpg";
 function getQRIS(){return QRIS_HARDCODED;}
 function loadQRIS(){let src=QRIS_HARDCODED;let img=document.getElementById('qrisImg');let err=document.getElementById('qrisError');let link=document.getElementById('qrisOpenLink');if(link)link.href=src;if(img){img.style.display='block';img.src=src;}if(err)err.style.display='none';}
@@ -214,7 +214,7 @@ async function sendToTelegram(order,buktiDataUrl){
     }
   }catch(e){console.log('Telegram gagal',e);}
 }
-function placeOrder(){if(!CURRENT_USER||!SELECTED)return toast('Silakan pilih produk terlebih dahulu');if(isSocial(SELECTED)&&SELECTED_QTY<100)return toast('Minimal Order 100 '+getUnit(SELECTED));let link=document.getElementById('coLink').value.trim(),wa=document.getElementById('coWA').value.trim(),note=document.getElementById('coNote').value.trim(),file=document.getElementById('coBukti').files[0];if(needLink(SELECTED.cat)&&!link)return toast('Mohon isi Username / Link Target');if(!wa)return toast('Mohon isi Nomor WhatsApp');if(!file)return toast('Mohon upload Bukti Pembayaran QRIS');let total=calcTotal(SELECTED,SELECTED_QTY),id='ORD-'+Date.now();let r=new FileReader();r.onload=e=>{let bukti=e.target.result;let order={id,product:SELECTED.name,productId:SELECTED.id,price:SELECTED.price,qty:SELECTED_QTY,unit:getUnit(SELECTED),total,link:needLink(SELECTED.cat)?link:'',wa,note,pay:'QRIS',bukti,userName:CURRENT_USER.username,email:CURRENT_USER.email,status:'Pending',createdAt:Date.now()};db.ref('orders/'+id).set(order).then(()=>{sendToTelegram(order,bukti);toast('Pesanan dibuat, bukti terkirim ke Telegram');goTab('orders');});};r.readAsDataURL(file);}
+function placeOrder(){console.log('TOMBOL PESAN DIKLIK',SELECTED);if(!CURRENT_USER||!SELECTED)return toast('Silakan pilih produk terlebih dahulu');if(isSocial(SELECTED)&&SELECTED_QTY<100)return toast('Minimal Order 100 '+getUnit(SELECTED));let link=document.getElementById('coLink').value.trim(),wa=document.getElementById('coWA').value.trim(),note=document.getElementById('coNote').value.trim(),file=document.getElementById('coBukti').files[0];if(needLink(SELECTED.cat)&&!link)return toast('Mohon isi Username / Link Target');if(!wa)return toast('Mohon isi Nomor WhatsApp');if(!file)return toast('Mohon upload Bukti Pembayaran QRIS');let btn=document.getElementById('btnPesan');if(btn){btn.innerText='Mengirim...';btn.disabled=true;}let total=calcTotal(SELECTED,SELECTED_QTY),id='ORD-'+Date.now();let r=new FileReader();r.onload=e=>{let bukti=e.target.result;let order={id,product:SELECTED.name,productId:SELECTED.id,price:SELECTED.price,qty:SELECTED_QTY,unit:getUnit(SELECTED),total,link:needLink(SELECTED.cat)?link:'',wa,note,pay:'QRIS',bukti,userName:CURRENT_USER.username,email:CURRENT_USER.email,status:'Pending',createdAt:Date.now()};db.ref('orders/'+id).set(order).then(()=>{sendToTelegram(order,bukti);toast('Pesanan dibuat, bukti terkirim ke Telegram');if(btn){btn.innerText='Kirim Bukti & Buat Pesanan';btn.disabled=false;}goTab('orders');}).catch(()=>{if(btn){btn.innerText='Kirim Bukti & Buat Pesanan';btn.disabled=false;}toast('Gagal simpan, coba lagi');});};r.readAsDataURL(file);}
 function loadMyOrders(){if(!CURRENT_USER){document.getElementById('myOrders').innerHTML='<p>Silakan masuk terlebih dahulu.</p>';return;}db.ref('orders').orderByChild('userName').equalTo(CURRENT_USER.username).on('value',snap=>{let list=Object.values(snap.val()||{}).sort((a,b)=>b.createdAt-a.createdAt);document.getElementById('orderCount').innerText=list.length;let b2=document.getElementById('orderCount2');if(b2)b2.innerText=list.length;document.getElementById('myTotalOrder').innerText=list.length;document.getElementById('myTotalSpent').innerText=fmt(list.reduce((a,b)=>a+(b.total||0),0));document.getElementById('myPending').innerText=list.filter(o=>o.status!=='Selesai').length;document.getElementById('myDone').innerText=list.filter(o=>o.status==='Selesai').length;document.getElementById('myOrders').innerHTML=list.length?list.map(o=>`<div class="order-card"><b>${o.product}</b> - <span class="status ${o.status}">${o.status}</span><br><small>${o.id} | ${new Date(o.createdAt).toLocaleString('id-ID')}</small><br>Jumlah: ${o.qty} ${o.unit||'pcs'} | Total: <b>${fmt(o.total)}</b>${o.link?'<br>Link: '+o.link:''}${o.bukti?'<br><img src="'+o.bukti+'" style="width:100%;max-width:220px;border-radius:10px;margin-top:6px">':''}</div>`).join(''):'Belum ada pesanan.';document.getElementById('dashRecent').innerHTML=list.slice(0,3).map(o=>`<div class="order-card"><b>${o.product}</b> - <span class="status ${o.status}">${o.status}</span><br><small>${fmt(o.total)}</small></div>`).join('')||'Belum ada pesanan.';});}
 function register(){let u=document.getElementById('regUser').value.trim().toLowerCase(),e=document.getElementById('regEmail').value.trim(),w=document.getElementById('regWA').value.trim(),p=document.getElementById('regPass').value;if(!u||!e||!w||!p)return toast('Mohon lengkapi semua data');db.ref('users/'+u).once('value').then(snap=>{if(snap.val())return toast('Username sudah dipakai');db.ref('users/'+u).set({username:u,email:e,wa:w,pass:p,createdAt:Date.now()}).then(()=>{CURRENT_USER={username:u,email:e,wa:w};localStorage.setItem('ransvelt_user',JSON.stringify(CURRENT_USER));toast('Pendaftaran berhasil');renderAuth();loadMyOrders();goTab('dashboard');});});}
 function login(){let inp=document.getElementById('loginUser').value.trim(),p=document.getElementById('loginPass').value;if(!inp||!p)return toast('Mohon isi Username / Email dan Password');let isEmail=inp.includes('@');let done=(d)=>{if(!d)return toast('Akun tidak ditemukan');if(d.pass!==p)return toast('Kata sandi salah');CURRENT_USER={username:d.username,email:d.email,wa:d.wa};localStorage.setItem('ransvelt_user',JSON.stringify(CURRENT_USER));toast('Berhasil masuk');renderAuth();loadMyOrders();goTab('dashboard');};if(isEmail){db.ref('users').orderByChild('email').equalTo(inp).once('value').then(snap=>{let vals=Object.values(snap.val()||{});done(vals[0]);});}else{db.ref('users/'+inp.toLowerCase()).once('value').then(snap=>done(snap.val()));}}
@@ -225,7 +225,8 @@ function saveRating(prod,text,photo){let id='RT-'+Date.now();db.ref('ratings/'+i
 function loadRatings(){db.ref('ratings').on('value',snap=>{let list=Object.values(snap.val()||{}).sort((a,b)=>b.createdAt-a.createdAt).slice(0,5);document.getElementById('ratingList').innerHTML=list.length?list.map(r=>`<div class="glass" style="padding:14px;margin-bottom:10px"><b>@${r.userName}</b> <span style="color:#f59e0b">${'★'.repeat(r.stars)}</span><br><small>${r.product}</small><p style="font-size:13px;margin-top:4px">${r.text}</p>${r.photo?`<img src="${r.photo}" style="width:100%;border-radius:14px;margin-top:8px">`:''}</div>`).join(''):'<p style="font-size:13px;color:#64748b">Belum ada rating.</p>';});}
 function loadStock(){db.ref('settings/stock').on('value',snap=>{STOCK=snap.val()||{};renderProducts();});db.ref('settings/prices').on('value',snap=>{let pr=snap.val()||{};PRODUCTS.forEach(p=>{if(pr[p.id]!==undefined&&pr[p.id]!==null)p.price=pr[p.id];});renderProducts();});}
 function loadGlobalStats(){db.ref('settings/statsManual').on('value',snapMan=>{let man=snapMan.val()||{useManual:false};if(man.useManual){document.getElementById('statDoneGlobal').innerText=(man.done||0).toLocaleString('id-ID');document.getElementById('statRatingGlobal').innerText=(man.rating||0).toFixed(1)+' ★';document.getElementById('statAvgTime').innerText=man.time||'-';return;}db.ref('orders').on('value',snap=>{let list=Object.values(snap.val()||{});let done=list.filter(o=>o.status==='Selesai');document.getElementById('statDoneGlobal').innerText=done.length.toLocaleString('id-ID');let times=done.filter(o=>o.completedAt&&o.createdAt).map(o=>o.completedAt-o.createdAt);let el=document.getElementById('statAvgTime');if(!times.length){el.innerText='-';return;}let avgMin=Math.round((times.reduce((a,b)=>a+b,0)/times.length)/60000);el.innerText=avgMin<1?'< 1 menit':avgMin<60?avgMin+' menit':(avgMin/60).toFixed(1)+' jam';});db.ref('ratings').on('value',snap=>{let list=Object.values(snap.val()||{});document.getElementById('statRatingGlobal').innerText=list.length?(list.reduce((a,b)=>a+(b.stars||0),0)/list.length).toFixed(1)+' ★':'0.0 ★';});});}
+document.addEventListener('DOMContentLoaded',()=>{let b=document.getElementById('btnPesan');if(b)b.addEventListener('click',placeOrder);});
 renderCats();renderStars();renderAuth();loadStock();loadRatings();loadGlobalStats();loadQRIS();if(CURRENT_USER)loadMyOrders();showPage('dashboard',document.querySelector('.nav button[data-tab="dashboard"]'));
 </script>
 </body>
-  </html>
+</html>
