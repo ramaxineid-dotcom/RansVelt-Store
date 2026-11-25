@@ -99,7 +99,7 @@ label{font-size:12px;font-weight:700;color:#334155}.section-title{font-size:17px
 </head>
 <body>
 <div id="toast"></div>
-<div class="qris-zoom" id="qrisZoom" onclick="closeQRISZoom()"><img id="qrisZoomImg" src="" alt="QRIS Zoom" referrerpolicy="no-referrer"><p>Klik di mana aja buat nutup</p><button onclick="closeQRISZoom()">Tutup</button></div>
+<div class="qris-zoom" id="qrisZoom" onclick="closeQRISZoom()"><img id="qrisZoomImg" src="https://cdn.imagetourls.com/uploads/tyImg/KC2k0b0t.jpg" alt="QRIS Zoom" referrerpolicy="no-referrer"><p>Klik di mana aja buat nutup</p><button onclick="closeQRISZoom()">Tutup</button></div>
 <aside class="sidebar" id="sidebar">
 <div class="logo">Rans<span>Velt</span></div><p style="font-size:12px;color:#64748b">Toko - Nokos & Social Boost</p>
 <nav class="nav">
@@ -147,10 +147,11 @@ label{font-size:12px;font-weight:700;color:#334155}.section-title{font-size:17px
 <label>Catatan (Opsional)</label><input id="coNote" placeholder="Catatan untuk admin">
 <label>Pembayaran - QRIS</label>
 <div class="qris-box"><b>Scan QRIS di bawah ini</b><br><small id="qrisTotal" style="color:#2563eb;font-weight:800"></small><br>
-<img id="qrisImg" src="" alt="QRIS" referrerpolicy="no-referrer" onclick="openQRISZoom()" onerror="qrisFailed()">
+<!-- QRIS DITANEM LANGSUNG DISINI, GA DARI CONFIG.JS -->
+<img id="qrisImg" src="https://cdn.imagetourls.com/uploads/tyImg/KC2k0b0t.jpg" alt="QRIS RansVelt Store" referrerpolicy="no-referrer" onclick="openQRISZoom()" onerror="qrisFailed()">
 <div style="font-size:11px;color:#64748b;margin-top:4px">Klik gambar untuk memperbesar</div>
-<a id="qrisOpenLink" href="#" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:8px 16px;border-radius:999px;background:#2563eb;color:#fff;font-weight:700;font-size:12px;text-decoration:none">Buka QRIS di Tab Baru</a>
-<div id="qrisError" class="qris-error">QRIS gagal dimuat. Klik tombol di atas untuk buka QRIS, atau cek config.js - QRIS_IMAGE</div>
+<a id="qrisOpenLink" href="https://cdn.imagetourls.com/uploads/tyImg/KC2k0b0t.jpg" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:8px 16px;border-radius:999px;background:#2563eb;color:#fff;font-weight:700;font-size:12px;text-decoration:none">Buka QRIS di Tab Baru</a>
+<div id="qrisError" class="qris-error">QRIS gagal dimuat. Klik tombol di atas untuk buka QRIS.</div>
 <small style="display:block;margin-top:8px">Bayar sesuai total, lalu upload bukti di bawah</small></div>
 <label>Upload Bukti Pembayaran *</label><input type="file" id="coBukti" accept="image/*">
 <button class="btn btn-green" onclick="placeOrder()">Kirim Bukti & Buat Pesanan</button><button class="btn btn-ghost" onclick="goTab('dashboard')">Batal</button></div></div>
@@ -164,10 +165,12 @@ label{font-size:12px;font-weight:700;color:#334155}.section-title{font-size:17px
 <script>
 firebase.initializeApp(firebaseConfig);const db=firebase.database();
 let STOCK={},CURRENT_USER=JSON.parse(localStorage.getItem('ransvelt_user')||'null'),SELECTED=null,SELECTED_QTY=1,CUR_CAT='NOKOS TELE',SEL_STARS=5;
-function getQRIS(){if(typeof QRIS_IMAGE!=='undefined'&&QRIS_IMAGE)return QRIS_IMAGE;if(typeof QRIS_URL!=='undefined'&&QRIS_URL)return QRIS_URL;if(typeof QRIS!=='undefined'&&QRIS)return QRIS;if(typeof QRIS_IMG!=='undefined'&&QRIS_IMG)return QRIS_IMG;if(typeof firebaseConfig!=='undefined'&&firebaseConfig.QRIS_IMAGE)return firebaseConfig.QRIS_IMAGE;return '';}
-function loadQRIS(){let src=getQRIS();let img=document.getElementById('qrisImg');let err=document.getElementById('qrisError');let link=document.getElementById('qrisOpenLink');console.log('QRIS src:',src);if(!src){if(img)img.style.display='none';if(err)err.style.display='block';return;}if(link)link.href=src;if(img){img.style.display='block';img.onerror=()=>qrisFailed();img.src=src+'?v='+Date.now();}if(err)err.style.display='none';}
+// QRIS HARDCODE DI INDEX.HTML - GA PAKE CONFIG.JS LAGI
+const QRIS_HARDCODED="https://cdn.imagetourls.com/uploads/tyImg/KC2k0b0t.jpg";
+function getQRIS(){return QRIS_HARDCODED;}
+function loadQRIS(){let src=QRIS_HARDCODED;let img=document.getElementById('qrisImg');let err=document.getElementById('qrisError');let link=document.getElementById('qrisOpenLink');if(link)link.href=src;if(img){img.style.display='block';img.src=src;}if(err)err.style.display='none';}
 function qrisFailed(){let err=document.getElementById('qrisError');if(err)err.style.display='block';}
-function openQRISZoom(){let src=getQRIS();if(!src)return;document.getElementById('qrisZoomImg').src=src;document.getElementById('qrisZoom').classList.add('show');}
+function openQRISZoom(){document.getElementById('qrisZoomImg').src=QRIS_HARDCODED;document.getElementById('qrisZoom').classList.add('show');}
 function closeQRISZoom(){document.getElementById('qrisZoom').classList.remove('show');}
 const PRODUCTS=[{id:'tele-id',cat:'NOKOS TELE',name:'Nokos Telegram Indonesia',price:8000},{id:'tele-my',cat:'NOKOS TELE',name:'Nokos Telegram Malaysia',price:12000},{id:'tele-vn',cat:'NOKOS TELE',name:'Nokos Telegram Vietnam',price:10000},{id:'tele-us',cat:'NOKOS TELE',name:'Nokos Telegram Amerika Serikat',price:15000},{id:'wa-id',cat:'NOKOS WA',name:'Nokos WhatsApp Indonesia',price:9000},{id:'wa-ph',cat:'NOKOS WA',name:'Nokos WhatsApp Filipina',price:11000},{id:'wa-jp',cat:'NOKOS WA',name:'Nokos WhatsApp Jepang',price:13000},{id:'tt-follow',cat:'TIKTOK',name:'TikTok Followers',price:15000},{id:'tt-like',cat:'TIKTOK',name:'TikTok Like',price:8000},{id:'tt-view',cat:'TIKTOK',name:'TikTok Views',price:5000},{id:'ig-follow',cat:'INSTAGRAM',name:'Instagram Followers',price:18000},{id:'ig-like',cat:'INSTAGRAM',name:'Instagram Like',price:9000},{id:'ig-view',cat:'INSTAGRAM',name:'Instagram Views',price:6000},{id:'web-gmail',cat:'WEBSITE',name:'Website Akun Gmail',price:25000},{id:'web-porto',cat:'WEBSITE',name:'Website Portofolio',price:50000}];
 const CATS=['NOKOS TELE','NOKOS WA','TIKTOK','INSTAGRAM','WEBSITE'];
@@ -225,4 +228,4 @@ function loadGlobalStats(){db.ref('settings/statsManual').on('value',snapMan=>{l
 renderCats();renderStars();renderAuth();loadStock();loadRatings();loadGlobalStats();loadQRIS();if(CURRENT_USER)loadMyOrders();showPage('dashboard',document.querySelector('.nav button[data-tab="dashboard"]'));
 </script>
 </body>
-</html>
+  </html>
