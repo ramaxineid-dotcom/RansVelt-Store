@@ -2,133 +2,138 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Admin - RansVelt Store</title>
+<title>Admin - RansVelt</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 <script src="config.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent}
-body{background:#eef4ff;color:#0f172a;padding-bottom:40px}
+body{background:linear-gradient(180deg,#dbeafe 0%,#eef4ff 30%,#f8fafc 100%);background-attachment:fixed;color:#0f172a;padding-bottom:110px;min-height:100vh}
+h1,h2,h3{font-weight:800;letter-spacing:-.02em}
 button{cursor:pointer;border:0;transition:.2s}button:active{transform:scale(.96)}
-.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e2e8f0}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px}.logo span{color:#2563eb}
-.main{max-width:1000px;margin:0 auto;padding:14px}
-.glass{background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 8px rgba(15,23,42,.04);border:1px solid #f1f5f9;margin-bottom:14px}
-.glass-blue{background:linear-gradient(135deg,#2563eb,#3b82f6);border-radius:20px;color:#fff;padding:20px;margin-bottom:14px}
-.btn{padding:11px 16px;border-radius:999px;background:#2563eb;color:#fff;font-weight:700}
-.btn-ghost{background:#f1f5f9;color:#0f172a}.btn-green{background:#16a34a}.btn-red{background:#ef4444}.btn-orange{background:#f59e0b}.btn-small{padding:8px 12px;font-size:12px}
-input,select,textarea{width:100%;padding:11px;border:1px solid #e2e8f0;border-radius:12px;margin:6px 0;background:#f8fafc;font-size:14px}
+input,select,textarea{width:100%;padding:12px;border:1px solid rgba(255,255,255,.9);border-radius:12px;margin:6px 0;background:rgba(255,255,255,.75);backdrop-filter:blur(10px);font-size:14px}
 label{font-size:12px;font-weight:700;color:#334155}
-.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:none}
-.tab{white-space:nowrap;padding:10px 16px;border-radius:999px;background:#fff;font-weight:700;font-size:13px;border:1px solid #e2e8f0;flex-shrink:0}
-.tab.active{background:#2563eb;color:#fff;border-color:#2563eb}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.prod-card{background:#f8fafc;border-radius:14px;padding:12px}
-.prod-card b{font-size:13px;display:block;min-height:32px;line-height:1.3}
-.prod-card small{color:#64748b;font-size:11px}
-.prod-row{display:flex;gap:6px;align-items:center;margin-top:6px}
-.prod-row input{margin:0;padding:9px}
-.order-card{background:#f8fafc;border-radius:14px;padding:12px;margin-bottom:10px}
+.glass{background:rgba(255,255,255,.55);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.75);border-radius:20px;box-shadow:0 12px 32px rgba(37,99,235,.10), inset 0 1px 0 rgba(255,255,255,.9);padding:14px;margin-bottom:12px}
+.topbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.55);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.75);box-shadow:0 8px 24px rgba(37,99,235,.10);padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+.topbar b{font-family:'Syne',sans-serif;font-size:19px}.topbar b span{color:#2563eb}
+.wrap{padding:12px;max-width:900px;margin:0 auto}
+.btn{width:100%;padding:12px 14px;border-radius:12px;background:rgba(37,99,235,.92);backdrop-filter:blur(10px);color:#fff;font-weight:700;font-size:14px;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 8px 20px rgba(37,99,235,.25)}
+.btn-ghost{background:rgba(255,255,255,.7);backdrop-filter:blur(10px);color:#0f172a;border:1px solid rgba(255,255,255,.9);box-shadow:0 4px 14px rgba(15,23,42,.06)}
+.btn-green{background:rgba(22,163,74,.92);box-shadow:0 8px 20px rgba(22,163,74,.25)}.btn-red{background:rgba(239,68,68,.92);box-shadow:0 8px 20px rgba(239,68,68,.25)}.btn-amber{background:rgba(245,158,11,.92);color:#fff;box-shadow:0 8px 20px rgba(245,158,11,.25)}
+.btn-sm{width:auto;padding:10px 14px;font-size:12px;margin-top:0;flex:1}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.stats .glass{margin:0;text-align:center;padding:12px}
+.stats b{font-size:20px;display:block}
+.stats small{color:#64748b;font-size:11px;line-height:1.3;display:block}
+.order-card{background:rgba(255,255,255,.65);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,.85);border-radius:16px;box-shadow:0 8px 20px rgba(37,99,235,.08), inset 0 1px 0 rgba(255,255,255,.9);padding:12px;margin-bottom:10px;font-size:13px;line-height:1.6}
 .order-card b{font-size:14px}
-.status{padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800}.Pending{background:#fef9c3;color:#854d0e}.Proses{background:#dbeafe;color:#1e40af}.Selesai{background:#dcfce7;color:#166534}
-#toast{position:fixed;top:16px;left:50%;transform:translate(-50%,-20px);background:rgba(255,255,255,.85);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);color:#0f172a;padding:13px 16px;border-radius:16px;display:none;z-index:300;font-size:13px;font-weight:600;max-width:92%;text-align:center;border:1px solid rgba(255,255,255,.9);box-shadow:0 12px 32px rgba(15,23,42,.18);opacity:0;transition:.3s}
-#toast.show{display:flex;align-items:center;gap:8px;transform:translate(-50%,0);opacity:1}
-#toast::before{content:"✓";width:22px;height:22px;flex-shrink:0;background:#2563eb;color:#fff;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
-.flex{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.flex button{flex:1}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:14px}
-.stat-grid .glass{margin:0;text-align:center;padding:14px}
-.stat-grid b{font-size:20px}
-@media(max-width:768px){.grid{grid-template-columns:1fr 1fr}.stat-grid{grid-template-columns:1fr 1fr}.main{padding:12px}}
+.order-card .row{display:flex;gap:6px;margin-top:10px}
+.order-card.done{opacity:.85}
+.status{display:inline-block;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:800}.Pending{background:rgba(254,249,195,.9);color:#854d0e}.Proses{background:rgba(219,234,254,.9);color:#1e40af}.Selesai{background:rgba(220,252,231,.9);color:#166534}
+/* CARD STOK + HARGA */
+.stock-row{background:rgba(255,255,255,.65);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.85);border-radius:14px;box-shadow:0 6px 16px rgba(37,99,235,.06);padding:12px;margin-bottom:10px}
+.stock-row b{font-size:13px;line-height:1.3;display:block}
+.stock-row .inputs{display:flex;gap:6px;margin-top:8px}
+.stock-row .inputs div{flex:1}
+.stock-row .inputs label{font-size:11px}
+.stock-row .inputs input{margin:2px 0 0 0;padding:10px 8px;text-align:center}
+.stock-row .btn{margin-top:8px}
+.rating-card{background:rgba(255,255,255,.65);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,.85);border-radius:16px;box-shadow:0 8px 20px rgba(37,99,235,.08), inset 0 1px 0 rgba(255,255,255,.9);padding:12px;margin-bottom:10px;font-size:13px}
+.rating-card img{width:100%;max-width:260px;border-radius:12px;margin-top:8px}
+.bottom-nav{position:fixed;bottom:14px;left:14px;right:14px;z-index:60;background:rgba(255,255,255,.55);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.75);border-radius:26px;box-shadow:0 12px 32px rgba(37,99,235,.18), inset 0 1px 0 rgba(255,255,255,.9);padding:8px;display:flex;justify-content:space-around}
+.bottom-nav button{flex:1;background:transparent;color:#64748b;font-weight:700;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:18px}
+.bottom-nav button svg{width:22px;height:22px}
+.bottom-nav button.active{background:rgba(37,99,235,.9);color:#fff;box-shadow:0 8px 20px rgba(37,99,235,.35)}
+#toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:rgba(15,23,42,.9);backdrop-filter:blur(12px);color:#fff;padding:12px 18px;border-radius:12px;display:none;z-index:300;font-size:13px;max-width:90%;text-align:center}
+@media(min-width:769px){.wrap{padding:18px}.stats{grid-template-columns:1fr 1fr 1fr 1fr}.bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:480px}}
 </style>
 </head>
 <body>
 <div id="toast"></div>
-<div class="topbar"><div><div class="logo">Rans<span>Velt</span> Admin</div><small style="color:#64748b">Kelola Toko - Nokos & Social Boost</small></div><button class="btn btn-ghost btn-small" onclick="location.href='index.html'">Lihat Web</button></div>
+<div class="topbar"><b>Rans<span>Velt</span> <small style="font-family:'Inter';font-weight:600;color:#64748b;font-size:12px">Admin</small></b><button id="logoutBtn" onclick="logout()" style="display:none;padding:8px 14px;border-radius:999px;background:rgba(254,226,226,.9);color:#991b1b;font-weight:700;font-size:12px">Keluar</button></div>
 
-<div class="main" id="loginBox">
-<div class="glass" style="max-width:420px;margin:30px auto"><h2>Login Admin</h2><p style="font-size:13px;color:#64748b;margin:6px 0">Masuk untuk mengelola pesanan, harga & stok.</p><input type="password" id="adminPass" placeholder="Password Admin"><button class="btn" style="width:100%" onclick="adminLogin()">Masuk Admin</button><p style="font-size:11px;color:#94a3b8;margin-top:8px">Default password ada di <b>config.js</b> - variabel <b>ADMIN_PASSWORD</b></p></div>
+<div class="wrap" id="loginBox">
+<div class="glass" style="max-width:420px;margin:20px auto;text-align:center">
+<h2 style="font-size:22px">Login Admin</h2><p style="font-size:13px;color:#64748b;margin:6px 0 12px">Masukkan password admin untuk mengelola toko.</p>
+<input type="password" id="adminPass" placeholder="Password Admin" onkeydown="if(event.key==='Enter')loginAdmin()">
+<button class="btn" onclick="loginAdmin()">Masuk Admin</button>
+<button class="btn btn-ghost" onclick="location.href='index.html'">Kembali ke Toko</button>
+</div>
 </div>
 
-<div class="main" id="adminBox" style="display:none">
-<div class="glass-blue"><h1 style="font-size:24px">Halo, Admin!</h1><p style="font-size:13px;opacity:.9;margin-top:4px">Semua pesanan baru langsung masuk ke sini & ke Telegram lu.</p><div class="flex"><button onclick="showTab('orders')" style="background:#fff;color:#2563eb;padding:11px;border-radius:999px;font-weight:800">Lihat Pesanan</button><button onclick="showTab('products')" style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff;padding:11px;border-radius:999px;font-weight:700">Kelola Produk</button></div></div>
-
-<div class="stat-grid">
-<div class="glass"><b id="stTotal" style="color:#2563eb">0</b><br><small>Total Pesanan</small></div>
-<div class="glass"><b id="stPending" style="color:#f59e0b">0</b><br><small>Pending</small></div>
-<div class="glass"><b id="stDone" style="color:#16a34a">0</b><br><small>Selesai</small></div>
-<div class="glass"><b id="stOmset" style="color:#2563eb">Rp0</b><br><small>Total Omset</small></div>
+<div class="wrap" id="adminBox" style="display:none">
+<div class="stats">
+<div class="glass"><b id="sTotal">0</b><small>Total Pesanan</small></div>
+<div class="glass"><b id="sPending">0</b><small>Menunggu / Proses</small></div>
+<div class="glass"><b id="sDone">0</b><small>Selesai</small></div>
+<div class="glass"><b id="sOmzet" style="color:#2563eb">Rp0</b><small>Total Omzet</small></div>
 </div>
 
-<div class="tabs">
-<button class="tab active" data-tab="orders" onclick="showTab('orders')">📦 Pesanan</button>
-<button class="tab" data-tab="products" onclick="showTab('products')">🛒 Produk & Harga</button>
-<button class="tab" data-tab="stock" onclick="showTab('stock')">📦 Stok</button>
-<button class="tab" data-tab="stats" onclick="showTab('stats')">📊 Statistik Web</button>
-<button class="tab" data-tab="settings" onclick="showTab('settings')">⚙️ Pengaturan</button>
-<button class="tab" data-tab="ratings" onclick="showTab('ratings')">⭐ Rating</button>
-</div>
-
-<!-- PESANAN -->
 <div id="tab-orders">
-<div class="glass"><h3>Filter Pesanan</h3><div class="flex"><button class="btn btn-ghost btn-small" onclick="setFilter('Semua')">Semua</button><button class="btn btn-small" style="background:#fef9c3;color:#854d0e" onclick="setFilter('Pending')">Pending</button><button class="btn btn-small" style="background:#dbeafe;color:#1e40af" onclick="setFilter('Proses')">Proses</button><button class="btn btn-small" style="background:#dcfce7;color:#166534" onclick="setFilter('Selesai')">Selesai</button></div><input id="searchOrder" placeholder="Cari ID / produk / username / WA..." oninput="renderOrders()"></div>
-<div id="orderList"></div>
+<div style="display:flex;gap:8px;margin-bottom:10px"><select id="filterStatus" onchange="loadOrders()"><option value="ALL">Semua Status</option><option value="Pending">Pending</option><option value="Proses">Proses</option><option value="Selesai">Selesai</option></select><input id="searchOrder" placeholder="Cari username / barang" oninput="loadOrders()"></div>
+<div id="orderList">Memuat...</div>
 </div>
 
-<!-- PRODUK & HARGA -->
-<div id="tab-products" style="display:none">
-<div class="glass"><h3>Kelola Harga Produk</h3><p style="font-size:12px;color:#64748b;margin:4px 0">Harga di sini langsung ngaruh ke web utama. TikTok & IG harganya per 100 Followers / Like / Views. Nokos & Website per pcs.</p><div class="grid" id="priceList"></div><button class="btn btn-green" style="width:100%;margin-top:12px" onclick="savePrices()">💾 Simpan Semua Harga</button></div>
-</div>
-
-<!-- STOK -->
 <div id="tab-stock" style="display:none">
-<div class="glass"><h3>Kelola Stok</h3><p style="font-size:12px;color:#64748b;margin:4px 0">Kosongin = stok gak terbatas / selalu Tersedia. Isi 0 = produk jadi TUTUP di web.</p><div class="grid" id="stockList"></div><button class="btn btn-green" style="width:100%;margin-top:12px" onclick="saveStock()">💾 Simpan Semua Stok</button></div>
+<div class="glass"><h3>Stok & Harga Produk</h3><p style="font-size:12px;color:#64748b;margin:4px 0 10px">Stok 0 = TUTUP. Kosongin stok = Tersedia. Harga langsung berubah di katalog pembeli.</p><div id="stockList"></div></div>
 </div>
 
-<!-- STATISTIK -->
 <div id="tab-stats" style="display:none">
-<div class="glass"><h3>Statistik Dashboard Web</h3><p style="font-size:12px;color:#64748b;margin:4px 0">Kalo dimatiin, angkanya ngikutin data asli dari pesanan & rating. Kalo dihidupin, lu bisa isi manual biar keliatan rame.</p><label><input type="checkbox" id="useManual" style="width:auto;margin-right:6px"> Pakai Angka Manual</label><label>Total Pesanan Selesai (Manual)</label><input type="number" id="manDone" placeholder="misal 1250"><label>Rating Global (Manual, 0 - 5)</label><input type="number" step="0.1" min="0" max="5" id="manRating" placeholder="misal 4.9"><label>Waktu Diproses (Manual)</label><input id="manTime" placeholder="misal 5 menit / 1 jam"><button class="btn btn-green" style="width:100%" onclick="saveStats()">💾 Simpan Statistik</button></div>
+<div class="glass"><h3>Statistik Manual</h3><p style="font-size:12px;color:#64748b;margin:4px 0 10px">Kalo aktif, angka di dashboard pembeli ngikutin yang lu isi di sini.</p>
+<label><input type="checkbox" id="useManual" style="width:auto;margin-right:6px"> Pakai Angka Manual</label>
+<label>Total Pesanan Selesai</label><input type="number" id="manDone" placeholder="Contoh: 120">
+<label>Rating</label><input type="number" step="0.1" id="manRating" placeholder="Contoh: 4.9">
+<label>Waktu Diproses</label><input id="manTime" placeholder="Contoh: 5 menit">
+<button class="btn" onclick="saveStats()">Simpan Statistik</button>
+</div>
 </div>
 
-<!-- PENGATURAN -->
-<div id="tab-settings" style="display:none">
-<div class="glass"><h3>QRIS & Telegram</h3><p style="font-size:12px;color:#64748b;margin:4px 0">QRIS & Telegram diatur di <b>config.js</b>. Kalo mau ganti, edit file config.js-nya, bukan dari sini.</p><label>Link QRIS Saat Ini (dari config.js)</label><input id="qrisPreview" readonly><img id="qrisImgPreview" style="width:100%;max-width:260px;border-radius:12px;margin-top:8px;display:none"><button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="loadSettings()">🔄 Refresh</button></div>
-<div class="glass"><h3>Info Produk Social</h3><p style="font-size:13px;line-height:1.6">• <b>TikTok & Instagram</b> - Pembeli bisa ketik jumlah sendiri, minimal <b>100</b><br>• Harga dihitung per <b>100</b> Followers / Like / Views<br>• <b>Nokos & Website</b> - Dropdown 1, 2, 5, 10 pcs, harga per pcs<br>• Semua pesanan baru otomatis terkirim ke Telegram admin</p></div>
+<div id="tab-ratings" style="display:none"><div id="ratingList">Memuat...</div></div>
 </div>
 
-<!-- RATING -->
-<div id="tab-ratings" style="display:none"><div id="ratingList"></div></div>
-</div>
+<nav class="bottom-nav" id="bottomNav" style="display:none">
+<button class="active" data-nav="orders" onclick="showTab('orders',this)">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/></svg>
+Pesanan</button>
+<button data-nav="stock" onclick="showTab('stock',this)">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+Stok & Harga</button>
+<button data-nav="stats" onclick="showTab('stats',this)">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+Statistik</button>
+<button data-nav="ratings" onclick="showTab('ratings',this)">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+Rating</button>
+</nav>
 
 <script>
 firebase.initializeApp(firebaseConfig);const db=firebase.database();
-let ALL_ORDERS={},ALL_PRICES={},ALL_STOCK={},CUR_FILTER='Semua';
+let ALL_ORDERS=[],ALL_RATINGS=[],STOCK={},PRICES={};
 const PRODUCTS=[{id:'tele-id',cat:'NOKOS TELE',name:'Nokos Telegram Indonesia',price:8000},{id:'tele-my',cat:'NOKOS TELE',name:'Nokos Telegram Malaysia',price:12000},{id:'tele-vn',cat:'NOKOS TELE',name:'Nokos Telegram Vietnam',price:10000},{id:'tele-us',cat:'NOKOS TELE',name:'Nokos Telegram Amerika Serikat',price:15000},{id:'wa-id',cat:'NOKOS WA',name:'Nokos WhatsApp Indonesia',price:9000},{id:'wa-ph',cat:'NOKOS WA',name:'Nokos WhatsApp Filipina',price:11000},{id:'wa-jp',cat:'NOKOS WA',name:'Nokos WhatsApp Jepang',price:13000},{id:'tt-follow',cat:'TIKTOK',name:'TikTok Followers',price:15000},{id:'tt-like',cat:'TIKTOK',name:'TikTok Like',price:8000},{id:'tt-view',cat:'TIKTOK',name:'TikTok Views',price:5000},{id:'ig-follow',cat:'INSTAGRAM',name:'Instagram Followers',price:18000},{id:'ig-like',cat:'INSTAGRAM',name:'Instagram Like',price:9000},{id:'ig-view',cat:'INSTAGRAM',name:'Instagram Views',price:6000},{id:'web-gmail',cat:'WEBSITE',name:'Website Akun Gmail',price:25000},{id:'web-porto',cat:'WEBSITE',name:'Website Portofolio',price:50000}];
-function isSocial(p){return p.cat==='TIKTOK'||p.cat==='INSTAGRAM';}
-function getUnit(p){if(p.id.includes('follow'))return 'Followers';if(p.id.includes('like'))return 'Like';if(p.id.includes('view'))return 'Views';return 'pcs';}
 function fmt(n){return 'Rp'+(n||0).toLocaleString('id-ID')}
-let toastTimer=null;
-function toast(m){let t=document.getElementById('toast');t.innerText=m;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2600)}
-function adminLogin(){let p=document.getElementById('adminPass').value;if(p===(typeof ADMIN_PASSWORD!=='undefined'?ADMIN_PASSWORD:'admin123')){localStorage.setItem('ransvelt_admin','1');document.getElementById('loginBox').style.display='none';document.getElementById('adminBox').style.display='block';loadAll();toast('Berhasil masuk admin');}else toast('Password salah');}
-if(localStorage.getItem('ransvelt_admin')==='1'){document.getElementById('loginBox').style.display='none';document.getElementById('adminBox').style.display='block';}
-function showTab(t){['orders','products','stock','stats','settings','ratings'].forEach(k=>document.getElementById('tab-'+k).style.display=k===t?'block':'none');document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));}
-function setFilter(f){CUR_FILTER=f;renderOrders();}
-function loadAll(){loadOrders();loadPrices();loadStockData();loadStatsData();loadSettings();loadRatings();}
-function loadOrders(){db.ref('orders').on('value',snap=>{ALL_ORDERS=snap.val()||{};renderOrders();let list=Object.values(ALL_ORDERS);document.getElementById('stTotal').innerText=list.length;document.getElementById('stPending').innerText=list.filter(o=>o.status==='Pending').length;document.getElementById('stDone').innerText=list.filter(o=>o.status==='Selesai').length;document.getElementById('stOmset').innerText=fmt(list.reduce((a,b)=>a+(b.total||0),0));});}
-function renderOrders(){let q=(document.getElementById('searchOrder').value||'').toLowerCase();let list=Object.values(ALL_ORDERS).sort((a,b)=>b.createdAt-a.createdAt);if(CUR_FILTER!=='Semua')list=list.filter(o=>o.status===CUR_FILTER);if(q)list=list.filter(o=>JSON.stringify(o).toLowerCase().includes(q));document.getElementById('orderList').innerHTML=list.length?list.map(o=>`<div class="order-card"><div style="display:flex;justify-content:space-between"><b>${o.product}</b><span class="status ${o.status}">${o.status}</span></div><small>${o.id} | ${new Date(o.createdAt).toLocaleString('id-ID')}</small><br><small>👤 @${o.userName} | ${o.email||''} | WA: ${o.wa||'-'}</small><br>Jumlah: <b>${o.qty} ${o.unit||'pcs'}</b> | Total: <b style="color:#2563eb">${fmt(o.total)}</b> | Bayar: ${o.pay||'QRIS'}${o.link?'<br>🔗 Link: <a href="'+o.link+'" target="_blank">'+o.link+'</a>':''}${o.note?'<br>📝 Catatan: '+o.note:''}${o.bukti?'<br><img src="'+o.bukti+'" style="width:100%;max-width:300px;border-radius:12px;margin-top:8px">':''}<div class="flex"><button class="btn btn-orange btn-small" onclick="setStatus('${o.id}','Proses')">Proses</button><button class="btn btn-green btn-small" onclick="setStatus('${o.id}','Selesai')">Selesai</button><button class="btn btn-ghost btn-small" onclick="setStatus('${o.id}','Pending')">Pending</button><button class="btn btn-red btn-small" onclick="deleteOrder('${o.id}')">Hapus</button></div></div>`).join(''):'<p style="text-align:center;color:#64748b;padding:20px">Belum ada pesanan.</p>';}
-function setStatus(id,st){let u={status:st};if(st==='Selesai')u.completedAt=Date.now();db.ref('orders/'+id).update(u).then(()=>toast('Status jadi '+st));}
-function deleteOrder(id){if(!confirm('Hapus pesanan ini?'))return;db.ref('orders/'+id).remove().then(()=>toast('Pesanan dihapus'));}
-function loadPrices(){db.ref('settings/prices').on('value',snap=>{ALL_PRICES=snap.val()||{};document.getElementById('priceList').innerHTML=PRODUCTS.map(p=>{let pr=ALL_PRICES[p.id]!==undefined?ALL_PRICES[p.id]:p.price;return `<div class="prod-card"><b>${p.name}</b><small>${p.cat} - ${isSocial(p)?'Harga per 100 '+getUnit(p):'Harga per pcs'}</small><div class="prod-row"><span style="font-weight:700">Rp</span><input type="number" id="price-${p.id}" value="${pr}"></div><small style="color:#2563eb">Saat ini: ${fmt(pr)} ${isSocial(p)?'/ 100 '+getUnit(p):'/ pcs'}</small></div>`;}).join('');});}
-function savePrices(){let obj={};PRODUCTS.forEach(p=>{let v=parseInt(document.getElementById('price-'+p.id).value||0);obj[p.id]=v;});db.ref('settings/prices').set(obj).then(()=>toast('Semua harga berhasil disimpan'));}
-function loadStockData(){db.ref('settings/stock').on('value',snap=>{ALL_STOCK=snap.val()||{};document.getElementById('stockList').innerHTML=PRODUCTS.map(p=>{let s=ALL_STOCK[p.id];return `<div class="prod-card"><b>${p.name}</b><small>${p.cat}</small><div class="prod-row"><input type="number" id="stock-${p.id}" value="${s!==undefined&&s!==null?s:''}" placeholder="Kosong = tak terbatas"></div><small>${s!==undefined&&s!==null&&s<=0?'🔴 TUTUP di web':s?'🟢 Stok: '+s:'🟢 Tersedia (tak terbatas)'}</small></div>`;}).join('');});}
-function saveStock(){let obj={};PRODUCTS.forEach(p=>{let v=document.getElementById('stock-'+p.id).value;if(v===''||v===null)obj[p.id]=null;else obj[p.id]=parseInt(v);});db.ref('settings/stock').set(obj).then(()=>toast('Semua stok berhasil disimpan'));}
-function loadStatsData(){db.ref('settings/statsManual').once('value').then(snap=>{let d=snap.val()||{};document.getElementById('useManual').checked=!!d.useManual;document.getElementById('manDone').value=d.done||'';document.getElementById('manRating').value=d.rating||'';document.getElementById('manTime').value=d.time||'';});}
-function saveStats(){db.ref('settings/statsManual').set({useManual:document.getElementById('useManual').checked,done:parseInt(document.getElementById('manDone').value||0),rating:parseFloat(document.getElementById('manRating').value||0),time:document.getElementById('manTime').value}).then(()=>toast('Statistik berhasil disimpan'));}
-function loadSettings(){let q=typeof QRIS_IMAGE!=='undefined'?QRIS_IMAGE:'';document.getElementById('qrisPreview').value=q;let img=document.getElementById('qrisImgPreview');if(q){img.src=q;img.style.display='block';}}
-function loadRatings(){db.ref('ratings').on('value',snap=>{let list=Object.values(snap.val()||{}).sort((a,b)=>b.createdAt-a.createdAt);document.getElementById('ratingList').innerHTML=list.length?list.map(r=>`<div class="glass"><b>@${r.userName}</b> <span style="color:#f59e0b">${'★'.repeat(r.stars)}</span><br><small>${r.product} | ${new Date(r.createdAt).toLocaleString('id-ID')}</small><p style="font-size:13px;margin-top:4px">${r.text}</p>${r.photo?`<img src="${r.photo}" style="width:100%;border-radius:14px;margin-top:8px">`:''}<button class="btn btn-red btn-small" style="margin-top:8px" onclick="deleteRating('${r.id}')">Hapus Rating</button></div>`).join(''):'<p style="text-align:center;color:#64748b">Belum ada rating.</p>';});}
-function deleteRating(id){if(!confirm('Hapus rating ini?'))return;db.ref('ratings/'+id).remove().then(()=>toast('Rating dihapus'));}
-if(localStorage.getItem('ransvelt_admin')==='1')loadAll();
+function toast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500)}
+function loginAdmin(){let p=document.getElementById('adminPass').value;let real=typeof ADMIN_PASSWORD!=='undefined'?ADMIN_PASSWORD:'nasya';if(p!==real)return toast('Password salah');localStorage.setItem('ransvelt_admin','1');showAdmin();}
+function logout(){localStorage.removeItem('ransvelt_admin');location.reload();}
+function showAdmin(){document.getElementById('loginBox').style.display='none';document.getElementById('adminBox').style.display='block';document.getElementById('logoutBtn').style.display='block';document.getElementById('bottomNav').style.display='flex';loadAll();}
+function showTab(t,btn){['orders','stock','stats','ratings'].forEach(k=>document.getElementById('tab-'+k).style.display='none');document.getElementById('tab-'+t).style.display='block';document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.toggle('active',b.dataset.nav===t));window.scrollTo({top:0,behavior:'smooth'});}
+function loadAll(){
+db.ref('orders').on('value',s=>{ALL_ORDERS=Object.values(s.val()||{}).sort((a,b)=>b.createdAt-a.createdAt);loadOrders();let done=ALL_ORDERS.filter(o=>o.status==='Selesai');document.getElementById('sTotal').innerText=ALL_ORDERS.length;document.getElementById('sPending').innerText=ALL_ORDERS.filter(o=>o.status!=='Selesai').length;document.getElementById('sDone').innerText=done.length;document.getElementById('sOmzet').innerText=fmt(ALL_ORDERS.reduce((a,b)=>a+(b.total||0),0));});
+db.ref('settings/stock').on('value',s=>{STOCK=s.val()||{};renderStock();});
+db.ref('settings/prices').on('value',s=>{PRICES=s.val()||{};renderStock();});
+db.ref('settings/statsManual').on('value',s=>{let m=s.val()||{};document.getElementById('useManual').checked=!!m.useManual;document.getElementById('manDone').value=m.done||'';document.getElementById('manRating').value=m.rating||'';document.getElementById('manTime').value=m.time||'';});
+db.ref('ratings').on('value',s=>{ALL_RATINGS=Object.values(s.val()||{}).sort((a,b)=>b.createdAt-a.createdAt);document.getElementById('ratingList').innerHTML=ALL_RATINGS.length?ALL_RATINGS.map(r=>`<div class="rating-card"><b>@${r.userName}</b> <span style="color:#f59e0b">${'★'.repeat(r.stars||0)}</span><br><small>${r.product||''} | ${new Date(r.createdAt).toLocaleString('id-ID')}</small><p style="margin-top:4px">${r.text||''}</p>${r.photo?`<img src="${r.photo}">`:''}<button class="btn btn-red" style="margin-top:10px" onclick="delRating('${r.id}')">Hapus Rating</button></div>`).join(''):'Belum ada rating.';});
+}
+function loadOrders(){let f=document.getElementById('filterStatus').value,q=(document.getElementById('searchOrder').value||'').toLowerCase();let list=ALL_ORDERS.filter(o=>(f==='ALL'||o.status===f)&&(!q||(o.product+' '+o.userName).toLowerCase().includes(q)));document.getElementById('orderList').innerHTML=list.length?list.map(o=>{let isDone=o.status==='Selesai';return `<div class="order-card ${isDone?'done':''}"><div style="display:flex;justify-content:space-between;align-items:start;gap:8px"><div><div style="font-size:12px;color:#64748b">Username</div><b>@${o.userName||'-'}</b><div style="font-size:12px;color:#64748b;margin-top:6px">Barang</div><b>${o.product}</b><div style="font-size:12px;color:#64748b;margin-top:6px">Harga</div><b style="color:#2563eb">${fmt(o.total)}</b></div><span class="status ${o.status}">${o.status}</span></div>${isDone?'':'<div class="row"><button class="btn btn-sm btn-amber" onclick="setStatus(\''+o.id+'\',\'Proses\')">Proses</button><button class="btn btn-sm btn-green" onclick="setStatus(\''+o.id+'\',\'Selesai\')">Selesai</button><button class="btn btn-sm btn-red" onclick="delOrder(\''+o.id+'\')">Hapus</button></div>'}</div>`;}).join(''):'Tidak ada pesanan.';}
+function setStatus(id,st){db.ref('orders/'+id).update({status:st,completedAt:st==='Selesai'?Date.now():null}).then(()=>toast('Status jadi '+st));}
+function delOrder(id){if(!confirm('Hapus pesanan ini?'))return;db.ref('orders/'+id).remove().then(()=>toast('Pesanan dihapus'));}
+function delRating(id){if(!confirm('Hapus rating ini?'))return;db.ref('ratings/'+id).remove().then(()=>toast('Rating dihapus'));}
+function getPrice(p){return PRICES[p.id]!==undefined&&PRICES[p.id]!==null?PRICES[p.id]:p.price;}
+function renderStock(){document.getElementById('stockList').innerHTML=PRODUCTS.map(p=>`<div class="stock-row"><b>${p.name}</b><small style="color:#64748b;font-weight:500">${p.cat}</small><div class="inputs"><div><label>Harga (Rp)</label><input type="number" id="pr-${p.id}" value="${getPrice(p)}"></div><div><label>Stok</label><input type="number" id="st-${p.id}" value="${STOCK[p.id]!==undefined&&STOCK[p.id]!==null?STOCK[p.id]:''}" placeholder="-"></div></div><button class="btn" onclick="saveOne('${p.id}')">Simpan Harga & Stok</button></div>`).join('')+`<button class="btn btn-green" onclick="saveAll()">Simpan Semua Harga & Stok</button>`;}
+function saveOne(id){let pr=document.getElementById('pr-'+id).value, st=document.getElementById('st-'+id).value;Promise.all([db.ref('settings/prices/'+id).set(pr===''?null:parseInt(pr)),db.ref('settings/stock/'+id).set(st===''?null:parseInt(st))]).then(()=>toast('Harga & Stok tersimpan'));}
+function saveAll(){let pObj={},sObj={};PRODUCTS.forEach(p=>{let pr=document.getElementById('pr-'+p.id).value, st=document.getElementById('st-'+p.id).value;if(pr!=='')pObj[p.id]=parseInt(pr);if(st!=='')sObj[p.id]=parseInt(st);});Promise.all([db.ref('settings/prices').set(pObj),db.ref('settings/stock').set(sObj)]).then(()=>toast('Semua Harga & Stok tersimpan'));}
+function saveStats(){db.ref('settings/statsManual').set({useManual:document.getElementById('useManual').checked,done:parseInt(document.getElementById('manDone').value||0),rating:parseFloat(document.getElementById('manRating').value||0),time:document.getElementById('manTime').value}).then(()=>toast('Statistik tersimpan'));}
+if(localStorage.getItem('ransvelt_admin')==='1')showAdmin();
 </script>
 </body>
 </html>
